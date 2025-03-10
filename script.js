@@ -10,3 +10,19 @@ document.getElementById('fact-btn').addEventListener('click', () => {
     const randomFact = facts[Math.floor(Math.random() * facts.length)];
     document.getElementById('fact-display').textContent = randomFact;
 });
+
+document.getElementById('language-selector').addEventListener('change', (event) => {
+    const selectedLanguage = event.target.value;
+
+    fetch(`/languages/${selectedLanguage}.json`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('title').textContent = data.title;
+            document.getElementById('header-title').textContent = data.title;
+            document.getElementById('description').textContent = data.description;
+            document.getElementById('fact-text').textContent = data.fact_text;
+            document.getElementById('fact-btn').textContent = data.fun_fact_button;
+            document.getElementById('footer').textContent = data.footer;
+        });
+});
+
